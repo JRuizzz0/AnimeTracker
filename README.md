@@ -1,7 +1,7 @@
 Scripts base de datos: 
 
 
-create database anime_tracker;
+create database Anime_tracker;
 
 -- 1. Crear la tabla principal
 CREATE TABLE animes (
