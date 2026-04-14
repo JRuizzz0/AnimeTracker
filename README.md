@@ -1,5 +1,8 @@
 Scripts base de datos: 
 
+
+create database anime_tracker;
+
 -- 1. Crear la tabla principal
 CREATE TABLE animes (
     id SERIAL PRIMARY KEY,
