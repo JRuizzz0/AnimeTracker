@@ -1,4 +1,4 @@
-#Scripts Base de Datos#
+# Scripts Base de Datos
 CREATE TABLE animes (
     id SERIAL PRIMARY KEY,             
     titulo VARCHAR(150) NOT NULL,
