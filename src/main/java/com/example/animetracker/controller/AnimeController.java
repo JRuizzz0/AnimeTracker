@@ -1,7 +1,7 @@
 package com.example.animetracker.controller;
 
 import com.example.animetracker.model.Anime;
-import com.example.animetracker.model.ConexionBDD;
+import com.example.animetracker.service.AnimeService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,7 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.sql.*;
+import java.sql.SQLException;
+import java.util.List;
 
 public class AnimeController {
 
@@ -17,10 +18,16 @@ public class AnimeController {
     @FXML private TableColumn<Anime, String> colTitulo;
     @FXML private TableColumn<Anime, String> colEstado;
     @FXML private TableColumn<Anime, Integer> colPuntuacion;
-
+    @FXML private TableColumn<Anime, Integer> colTotalEp;
+    @FXML private TableColumn<Anime, Integer> colVistosEp;
     @FXML private TextField txtTitulo;
     @FXML private TextField txtGenero;
+    @FXML private TextField txtTotalEp;
+    @FXML private TextField txtVistosEp;
+    @FXML private TextField txtPuntuacion;
+    @FXML private ComboBox<String> comboEstado;
 
+    private final AnimeService animeService = new AnimeService();
     private ObservableList<Anime> listaAnimes = FXCollections.observableArrayList();
 
     @FXML
@@ -28,95 +35,105 @@ public class AnimeController {
         colTitulo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitulo()));
         colEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEstado()));
         colPuntuacion.setCellValueFactory(new PropertyValueFactory<>("puntuacion"));
+        comboEstado.setItems(FXCollections.observableArrayList("Pendiente", "Viendo", "Completado", "Abandonado"));
+        colTotalEp.setCellValueFactory(new PropertyValueFactory<>("episodiosTotales"));
+        colVistosEp.setCellValueFactory(new PropertyValueFactory<>("episodiosVistos"));
+
+
+        tablaAnimes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                txtTitulo.setText(newSelection.getTitulo());
+                txtGenero.setText(newSelection.getGenero());
+            }
+        });
 
         cargarAnimes();
     }
 
     private void cargarAnimes() {
-        listaAnimes.clear();
-        String query = "SELECT * FROM animes";
-        try (Connection conn = ConexionBDD.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-
-            while (rs.next()) {
-                listaAnimes.add(new Anime(
-                        rs.getInt("id"),
-                        rs.getString("titulo"),
-                        rs.getString("genero"),
-                        rs.getInt("episodios_totales"),
-                        rs.getInt("episodios_vistos"),
-                        rs.getString("estado"),
-                        rs.getInt("puntuacion")
-                ));
-            }
+        try {
+            listaAnimes.clear();
+            List<Anime> animes = animeService.listarAnimes();
+            listaAnimes.addAll(animes);
             tablaAnimes.setItems(listaAnimes);
         } catch (SQLException e) {
-            e.printStackTrace();
+            mostrarAlerta("Error de carga", "No se pudieron obtener los datos.");
         }
     }
 
     @FXML
     private void Guardar() {
-        String query = "INSERT INTO animes (titulo, genero, episodios_totales) VALUES (?, ?, ?)";
-        try (Connection conn = ConexionBDD.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+        try {
 
-            pstmt.setString(1, txtTitulo.getText());
-            pstmt.setString(2, txtGenero.getText());
-            pstmt.setInt(3, 12);
+            String titulo = txtTitulo.getText();
+            String genero = txtGenero.getText();
+            int totalEp = Integer.parseInt(txtTotalEp.getText());
+            int vistos = Integer.parseInt(txtVistosEp.getText());
+            String estado = comboEstado.getValue();
+            int nota = Integer.parseInt(txtPuntuacion.getText());
+            Anime nuevo = new Anime(0, titulo, genero, totalEp, vistos, estado, nota);
+            animeService.guardarAnime(nuevo);
 
-            pstmt.executeUpdate();
             cargarAnimes();
-            txtTitulo.clear();
-            txtGenero.clear();
+            limpiarCampos();
+
+        } catch (NumberFormatException e) {
+            mostrarAlerta("Error de datos", "Por favor, introduce números válidos en episodios y nota.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-
     @FXML
     private void Eliminar() {
         Anime seleccionado = tablaAnimes.getSelectionModel().getSelectedItem();
         if (seleccionado != null) {
-            String query = "DELETE FROM animes WHERE id = ?";
-            try (Connection conn = ConexionBDD.getConnection();
-                 PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-                pstmt.setInt(1, seleccionado.getId());
-                pstmt.executeUpdate();
+            try {
+                animeService.borrarAnime(seleccionado.getId());
                 cargarAnimes();
             } catch (SQLException e) {
-                e.printStackTrace();
+                mostrarAlerta("Error al eliminar", "No se pudo borrar el registro.");
             }
         }
     }
 
     @FXML
     private void Actualizar() {
-        Anime seleccionado = tablaAnimes.getSelectionModel().getSelectedItem();
+        Anime sel = tablaAnimes.getSelectionModel().getSelectedItem();
 
-        if (seleccionado != null) {
-            String query = "UPDATE animes SET titulo = ?, genero = ? WHERE id = ?";
+        if (sel != null) {
+            try {
+                int total = txtTotalEp.getText().isEmpty() ? 0 : Integer.parseInt(txtTotalEp.getText());
+                int vistos = txtVistosEp.getText().isEmpty() ? 0 : Integer.parseInt(txtVistosEp.getText());
+                int nota = txtPuntuacion.getText().isEmpty() ? 0 : Integer.parseInt(txtPuntuacion.getText());
 
-            try (Connection conn = ConexionBDD.getConnection();
-                 PreparedStatement pstmt = conn.prepareStatement(query)) {
+                sel.setTitulo(txtTitulo.getText());
+                sel.setGenero(txtGenero.getText());
+                sel.setEpisodiosTotales(total);
+                sel.setEpisodiosVistos(vistos);
+                sel.setEstado(comboEstado.getValue());
+                sel.setPuntuacion(nota);
 
-                pstmt.setString(1, txtTitulo.getText());
-                pstmt.setString(2, txtGenero.getText());
-                pstmt.setInt(3, seleccionado.getId());
-
-                pstmt.executeUpdate();
+                animeService.actualizarAnime(sel);
                 cargarAnimes();
 
-                txtTitulo.clear();
-                txtGenero.clear();
-                tablaAnimes.getSelectionModel().clearSelection();
-
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Has puesto letras donde van números.");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void limpiarCampos() {
+        txtTitulo.clear();
+        txtGenero.clear();
+    }
+
+    private void mostrarAlerta(String titulo, String mensaje) {
+        Alert alerta = new Alert(Alert.AlertType.ERROR);
+        alerta.setTitle(titulo);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
     }
 }

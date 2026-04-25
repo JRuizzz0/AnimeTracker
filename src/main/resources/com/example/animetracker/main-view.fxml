@@ -1,27 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.animetracker.controller.AnimeController"
       spacing="10"
       alignment="CENTER">
 
-    <Label text="Mi Lista de Anime" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Mi Lista de Anime" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
 
     <TableView fx:id="tablaAnimes" VBox.vgrow="ALWAYS">
         <columns>
-            <TableColumn fx:id="colTitulo" text="Título" prefWidth="200"/>
+            <TableColumn fx:id="colTitulo" text="Título" prefWidth="150"/>
             <TableColumn fx:id="colEstado" text="Estado" prefWidth="100"/>
+            <TableColumn fx:id="colTotalEp" text="Total Eps" prefWidth="80"/>
+            <TableColumn fx:id="colVistosEp" text="Vistos" prefWidth="80"/>
             <TableColumn fx:id="colPuntuacion" text="Nota" prefWidth="50"/>
         </columns>
     </TableView>
 
-    <HBox spacing="10" alignment="CENTER" >
-        <TextField fx:id="txtTitulo" promptText="Título"/>
-        <TextField fx:id="txtGenero" promptText="Género"/>
-        <Button text="Añadir" onAction="#Guardar"/>
-        <Button text="Actualizar" onAction="#Actualizar" style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
-        <Button text="Eliminar" onAction="#Eliminar" style="-fx-background-color: red; -fx-text-fill: white;"/>
+    <GridPane hgap="10" vgap="10" alignment="CENTER">
+        <TextField fx:id="txtTitulo" promptText="Título" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="txtGenero" promptText="Género" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <ComboBox fx:id="comboEstado" promptText="Estado" prefWidth="150" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+
+        <TextField fx:id="txtTotalEp" promptText="Total Eps" prefWidth="70" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="txtVistosEp" promptText="Vistos" prefWidth="70" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <TextField fx:id="txtPuntuacion" promptText="Nota (0-10)" prefWidth="80" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+    </GridPane>
+
+    <HBox spacing="15" alignment="CENTER">
+        <Button text="Añadir" onAction="#Guardar"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;"/>
+        <Button text="Actualizar" onAction="#Actualizar"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;"/>
+        <Button text="Eliminar" onAction="#Eliminar"
+                style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;"/>
     </HBox>
 </VBox>
