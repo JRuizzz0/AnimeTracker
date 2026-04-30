@@ -26,7 +26,7 @@
 
     <GridPane hgap="10" vgap="10" alignment="CENTER">
         <TextField fx:id="txtTitulo" promptText="Título" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-        <TextField fx:id="txtGenero" promptText="Género" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <ComboBox fx:id="comboGenero" promptText="Género" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
         <ComboBox fx:id="comboEstado" promptText="Estado" prefWidth="150" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
 
         <TextField fx:id="txtTotalEp" promptText="Total Eps" prefWidth="70" GridPane.columnIndex="0" GridPane.rowIndex="1"/>

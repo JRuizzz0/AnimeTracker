@@ -21,7 +21,7 @@ public class AnimeController {
     @FXML private TableColumn<Anime, Integer> colTotalEp;
     @FXML private TableColumn<Anime, Integer> colVistosEp;
     @FXML private TextField txtTitulo;
-    @FXML private TextField txtGenero;
+    @FXML private ComboBox<String> comboGenero;;
     @FXML private TextField txtTotalEp;
     @FXML private TextField txtVistosEp;
     @FXML private TextField txtPuntuacion;
@@ -36,6 +36,7 @@ public class AnimeController {
         colEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEstado()));
         colPuntuacion.setCellValueFactory(new PropertyValueFactory<>("puntuacion"));
         comboEstado.setItems(FXCollections.observableArrayList("Pendiente", "Viendo", "Completado", "Abandonado"));
+        comboGenero.setItems(FXCollections.observableArrayList("Kodomo", "Shōnen", "Shōjo", "Seinen", "Josei", "Isekai", "Slice of Life", "Spokon"));
         colTotalEp.setCellValueFactory(new PropertyValueFactory<>("episodiosTotales"));
         colVistosEp.setCellValueFactory(new PropertyValueFactory<>("episodiosVistos"));
 
@@ -43,7 +44,7 @@ public class AnimeController {
         tablaAnimes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 txtTitulo.setText(newSelection.getTitulo());
-                txtGenero.setText(newSelection.getGenero());
+
             }
         });
 
@@ -66,7 +67,7 @@ public class AnimeController {
         try {
 
             String titulo = txtTitulo.getText();
-            String genero = txtGenero.getText();
+            String genero = comboGenero.getValue();
             int totalEp = Integer.parseInt(txtTotalEp.getText());
             int vistos = Integer.parseInt(txtVistosEp.getText());
             String estado = comboEstado.getValue();
@@ -108,7 +109,7 @@ public class AnimeController {
                 int nota = txtPuntuacion.getText().isEmpty() ? 0 : Integer.parseInt(txtPuntuacion.getText());
 
                 sel.setTitulo(txtTitulo.getText());
-                sel.setGenero(txtGenero.getText());
+                sel.setGenero(comboGenero.getValue());
                 sel.setEpisodiosTotales(total);
                 sel.setEpisodiosVistos(vistos);
                 sel.setEstado(comboEstado.getValue());
@@ -127,7 +128,7 @@ public class AnimeController {
 
     private void limpiarCampos() {
         txtTitulo.clear();
-        txtGenero.clear();
+
     }
 
     private void mostrarAlerta(String titulo, String mensaje) {
