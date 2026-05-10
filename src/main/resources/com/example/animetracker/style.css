@@ -1,0 +1,80 @@
+/* Configuración general de la ventana */
+.root {
+    -fx-background-color: #2c3e50;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* Estilo para las etiquetas de título */
+.titulo-label {
+    -fx-text-fill: #ecf0f1;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+/* Estilo para la Tabla */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-base: #34495e;
+    -fx-control-inner-background: #34495e;
+    -fx-background-radius: 5;
+}
+
+.table-view .column-header {
+    -fx-background-color: #1a252f;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* Botones con clases específicas */
+.button {
+    -fx-cursor: hand;
+    -fx-background-radius: 5;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 20;
+}
+
+.btn-guardar {
+    -fx-background-color: #27ae60;
+}
+.btn-guardar:hover { -fx-background-color: #2ecc71; }
+
+.btn-actualizar {
+    -fx-background-color: #2980b9;
+}
+.btn-actualizar:hover { -fx-background-color: #3498db; }
+
+.btn-eliminar {
+    -fx-background-color: #c0392b;
+}
+.btn-eliminar:hover { -fx-background-color: #e74c3c; }
+
+.btn-catalogo {
+    -fx-background-color: #8e44ad;
+}
+
+/* Campos de texto */
+.text-field {
+    -fx-background-color: #ecf0f1;
+    -fx-background-radius: 3;
+}
+/* Estilo específico para el botón Volver */
+.btn-volver {
+    -fx-background-color: #7f8c8d; /* Gris profesional */
+}
+.btn-volver:hover {
+    -fx-background-color: #95a5a6;
+}
+
+/* Opcional: Estilo para resaltar la fila seleccionada en las tablas */
+.table-view .table-row-cell:selected {
+    -fx-background-color: #3498db;
+    -fx-background-insets: 0;
+}
+
+.table-view .table-row-cell:selected .text {
+    -fx-fill: white;
+}
