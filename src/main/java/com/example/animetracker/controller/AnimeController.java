@@ -14,6 +14,8 @@ import java.util.List;
 
 public class AnimeController {
 
+
+    
     @FXML private TableView<Anime> tablaAnimes;
     @FXML private TableColumn<Anime, String> colTitulo;
     @FXML private TableColumn<Anime, String> colEstado;
