@@ -1,5 +1,6 @@
 package com.example.animetracker.controller;
 
+import com.example.animetracker.exceptions.NegException;
 import com.example.animetracker.model.Anime;
 import com.example.animetracker.service.AnimeService;
 import javafx.beans.property.SimpleStringProperty;
