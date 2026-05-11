@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.animetracker.controller.CatalogoController"
+      spacing="15" alignment="CENTER"
+      stylesheets="@style.css"
+      styleClass="root"> <padding>
+    <Insets top="20" right="20" bottom="20" left="20"/>
+</padding>
+
+    <Label text="Catálogo de Sugerencias" styleClass="titulo-label"/>
+
+    <TableView fx:id="tablaCatalogo" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colTitulo" text="Título" prefWidth="200"/>
+            <TableColumn fx:id="colGenero" text="Género" prefWidth="120"/>
+            <TableColumn fx:id="colEps" text="Eps Totales" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="20" alignment="CENTER">
+        <Button text="← Volver" onAction="#volver" styleClass="btn-volver"/>
+        <Button text="✚ Añadir a mi Lista" onAction="#añadirAMiLista" styleClass="btn-guardar"/>
+    </HBox>
+</VBox>

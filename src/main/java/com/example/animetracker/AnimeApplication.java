@@ -5,7 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+//Autor: Jaime Ruiz Araujo
+//DAW Primer Año
+//Proyecto MPO No intermodular
 
 public class AnimeApplication extends Application {
     @Override

@@ -1,45 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.GridPane?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.animetracker.controller.AnimeController"
-      spacing="10"
-      alignment="CENTER">
+      spacing="15" alignment="CENTER"
+      stylesheets="@style.css"
+      styleClass="root">
 
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="Mi Lista de Anime" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+    <Label text="Mi Lista de Anime" styleClass="titulo-label"/>
 
     <TableView fx:id="tablaAnimes" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="colTitulo" text="Título" prefWidth="150"/>
             <TableColumn fx:id="colEstado" text="Estado" prefWidth="100"/>
-            <TableColumn fx:id="colTotalEp" text="Total Eps" prefWidth="80"/>
-            <TableColumn fx:id="colVistosEp" text="Vistos" prefWidth="80"/>
+            <TableColumn fx:id="colTotalEp" text="Eps" prefWidth="70"/>
+            <TableColumn fx:id="colVistosEp" text="Vistos" prefWidth="70"/>
             <TableColumn fx:id="colPuntuacion" text="Nota" prefWidth="50"/>
         </columns>
     </TableView>
 
     <GridPane hgap="10" vgap="10" alignment="CENTER">
-        <TextField fx:id="txtTitulo" promptText="Título" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-        <ComboBox fx:id="comboGenero" promptText="Género" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-        <ComboBox fx:id="comboEstado" promptText="Estado" prefWidth="150" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+        <TextField fx:id="txtTitulo" promptText="Título del Anime" GridPane.columnIndex="0" GridPane.rowIndex="0" prefWidth="200"/>
+        <ComboBox fx:id="comboGenero" promptText="Género" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="150"/>
 
-        <TextField fx:id="txtTotalEp" promptText="Total Eps" prefWidth="70" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-        <TextField fx:id="txtVistosEp" promptText="Vistos" prefWidth="70" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-        <TextField fx:id="txtPuntuacion" promptText="Nota (0-10)" prefWidth="80" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+        <TextField fx:id="txtTotalEp" promptText="Total Eps" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="90"/>
+        <TextField fx:id="txtVistosEp" promptText="Eps Vistos" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="90"/>
+
+        <TextField fx:id="txtPuntuacion" promptText="Nota (0-10)" GridPane.columnIndex="0" GridPane.rowIndex="2" prefWidth="90"/>
+        <ComboBox fx:id="comboEstado" promptText="Estado" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="150"/>
     </GridPane>
 
-    <HBox spacing="15" alignment="CENTER">
-        <Button text="Añadir" onAction="#Guardar"
-                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;"/>
-        <Button text="Actualizar" onAction="#Actualizar"
-                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;"/>
-        <Button text="Eliminar" onAction="#Eliminar"
-                style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20;"/>
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Añadir" onAction="#Guardar" styleClass="btn-guardar"/>
+        <Button text="Actualizar" onAction="#Actualizar" styleClass="btn-actualizar"/>
+        <Button text="Eliminar" onAction="#Eliminar" styleClass="btn-eliminar"/>
+        <Button text="Catálogo" onAction="#irAlCatalogo" styleClass="btn-catalogo"/>
     </HBox>
 </VBox>
