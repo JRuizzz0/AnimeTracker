@@ -1,4 +1,4 @@
-package com.example.animetracker.model;
+package com.example.animetracker.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

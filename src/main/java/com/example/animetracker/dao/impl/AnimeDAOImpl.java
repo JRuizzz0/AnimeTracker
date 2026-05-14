@@ -2,7 +2,7 @@ package com.example.animetracker.dao.impl;
 
 import com.example.animetracker.dao.AnimeDAO;
 import com.example.animetracker.model.Anime;
-import com.example.animetracker.model.ConexionBDD;
+import com.example.animetracker.config.ConexionBDD;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

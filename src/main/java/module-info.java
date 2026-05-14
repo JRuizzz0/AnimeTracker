@@ -14,4 +14,6 @@ module com.example.animetracker {
 
     opens com.example.animetracker.model to javafx.base;
     exports com.example.animetracker.model;
+    exports com.example.animetracker.config;
+    opens com.example.animetracker.config to javafx.base;
 }
