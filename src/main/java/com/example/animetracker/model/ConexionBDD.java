@@ -16,7 +16,7 @@ public class ConexionBDD {
     private static final String USER = "postgres";
 
     /** La contraseña que puse al instalar la base de datos */
-    private static final String PASSWORD = "1234";
+    private static final String PASSWORD = "postgres";
 
     /**
      * * @return El objeto Connection que nos permite enviarle comandos SQL a la base de datos.
