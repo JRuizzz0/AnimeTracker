@@ -17,7 +17,7 @@ public class Anime {
     /**
      * Este es el constructor. Sirve para crear un objeto Anime nuevo
      * pasándole todos sus datos de golpe.
-     * * @param id El número de identificación en la base de datos.
+     * @param id El número de identificación en la base de datos.
      * @param titulo Cómo se llama el anime.
      * @param genero El tipo de anime (Shonen, Seinen, etc.).
      * @param episodiosTotales Cuántos episodios tiene en total.

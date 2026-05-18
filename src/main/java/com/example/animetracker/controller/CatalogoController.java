@@ -93,7 +93,7 @@ public class CatalogoController {
     /**
      * Una función pequeñita que me sirve para sacar avisos por pantalla
      * sin tener que escribir todo el código del Alert cada vez.
-     * * @param titulo  Lo que sale arriba de la ventanita.
+     * @param titulo  Lo que sale arriba de la ventanita.
      * @param mensaje El texto que lee el usuario.
      * @param tipo    Si es una información, un error o un aviso.
      */
@@ -108,7 +108,7 @@ public class CatalogoController {
     /**
      * Esta función es para el botón "Volver".
      * Cierra esta vista y nos carga de nuevo la pantalla principal (main-view).
-     * * @throws IOException Si no encuentra el archivo del diseño principal.
+     * @throws IOException Si no encuentra el archivo del diseño principal.
      */
     @FXML
     private void volver() throws IOException {

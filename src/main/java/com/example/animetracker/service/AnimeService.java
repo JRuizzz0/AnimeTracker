@@ -37,7 +37,7 @@ public class AnimeService {
     /**
      * Sirve para guardar un anime. Antes de llamar al DAO, pasa por mi
      * función de validar para ver si el usuario ha puesto algún número negativo.
-     * * @param anime El anime que queremos guardar.
+     * @param anime El anime que queremos guardar.
      * @throws SQLException Por fallos de conexión.
      * @throws NegException Si el usuario ha puesto datos que no tienen sentido.
      */
@@ -49,7 +49,7 @@ public class AnimeService {
     /**
      * Sirve para actualizar un anime. También comprueba los datos antes
      * de hacer el cambio definitivo en la base de datos.
-     * * @param anime El anime con los cambios hechos.
+     * @param anime El anime con los cambios hechos.
      * @throws SQLException Si falla la base de datos.
      * @throws NegException Si se intentan poner números negativos en la actualización.
      */
@@ -61,7 +61,7 @@ public class AnimeService {
     /**
      * Se encarga de borrar un anime por su ID, pero primero mira si
      * el número que le pasamos es válido.
-     * * @param id El número identificador del anime.
+     * @param id El número identificador del anime.
      * @throws SQLException Si hay un error al borrar en PostgreSQL.
      */
     public void borrarAnime(int id) throws SQLException {
@@ -73,7 +73,7 @@ public class AnimeService {
      * Mira si el título está vacío, si los episodios son negativos o si
      * has visto más capítulos de los que existen. Si algo está mal,
      * lanza mi excepción personalizada.
-     * * @param anime El objeto que queremos revisar.
+     * @param anime El objeto que queremos revisar.
      * @throws NegException El error que avisa de qué dato está mal puesto.
      */
     private void validarAnime(Anime anime) throws NegException {

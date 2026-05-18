@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Esta clase es el "puente" que une Java con la base de datos PostgreSQL.
+ * Esta clase es el punto de conexión que une Java con la base de datos PostgreSQL.
  */
 public class ConexionBDD {
 
@@ -19,7 +19,7 @@ public class ConexionBDD {
     private static final String PASSWORD = "postgres";
 
     /**
-     * * @return El objeto Connection que nos permite enviarle comandos SQL a la base de datos.
+     * @return El objeto Connection que nos permite enviarle comandos SQL a la base de datos.
      * @throws SQLException Si los datos están mal puestos o la base de datos está apagada.
      */
     public static Connection getConnection() throws SQLException {
